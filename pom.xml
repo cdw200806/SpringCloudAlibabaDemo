@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>springcloudalibabademo</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>eurekaserver01</module>
+        <module>eurekaserver02</module>
+        <module>order-service-feign</module>
+        <module>order-service-rest</module>
+        <module>product-service</module>
+    </modules>
+
+
+    <!--    这样子项目也会统一继承父项目这个依赖的版本。这就叫统一化的版本管理  继承springboot-->
+    <!--通过parent引用项目A 可使用A的dependency.但不能使用A定义的方法
+    通过dependency 依赖A两者都能调用
+    -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.4.RELEASE</version>
+    </parent>
+
+    <!--  与 dM的  dependencies 优先级高于dm   dm只是声明依赖，并没有实现引入-->
+    <!--    好处是  存在父子相互依赖关系的。如果子项目中没有指定 version 和 scope则继承这个-->
+    <!-- 为什么要用这个标签值呢，这就可以类比继承，正规继承是pom中的<parent></parent>标签，如果我们想继承多套pom文件，就需要在dependencyManagement中使用impot-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
+    </properties>
+
+</project>

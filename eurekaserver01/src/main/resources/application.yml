@@ -1,0 +1,25 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: eureka-server #应用名称
+#  security:
+#    user:
+#      name: root
+#      password: 123456
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  #    hostname: eureka01    #主机名 默认是操作系统主机名
+
+  client:
+
+#    #默认是分布式 所以默认true.  自娱自乐的过程  禁用调。  集群间互相注册，互相拉取 。。。不适用于单机。
+#    register-with-eureka: false   #是否将自己注册到注册中心，默认为true
+#    fetch-registry: false         #是否从注册中心获取服务注册信息，默认为true
+    service-url: #注册中心对外暴露的注册地址
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+#      defaultZone: http://root:123456@localhost:8762/eureka/
+      defaultZone: http://localhost:8762/eureka/
