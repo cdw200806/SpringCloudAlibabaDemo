@@ -2,7 +2,7 @@ server:
   port: 9091
 spring:
   application:
-    name: order-service-feignmain #应用名称
+    name: order-service-feign #应用名称
 
 eureka:
   instance:
