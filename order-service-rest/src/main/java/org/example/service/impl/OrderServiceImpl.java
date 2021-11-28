@@ -3,6 +3,7 @@ package org.example.service.impl;
 import org.example.pojo.Order;
 import org.example.pojo.Product;
 import org.example.service.OrderService;
+import org.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -31,6 +32,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     DiscoveryClient discoveryClient;
 
+    @Autowired
+    ProductService productService;
 
     @Autowired
     private LoadBalancerClient loadBalancerClient; //Ribbon 负责均衡器     spring cloud netflix  网飞 模式下、无处不在。微服务间通讯方式。各组件的这个依赖必然有。
@@ -118,6 +121,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order selectOrderByIdAndOrderNo(Integer id,String orderNo){
-        return new Order(1, "order-001", "中国", 6666D, selectProductListByLoadBalancerAnnotation());
+        return new Order(1, orderNo, "中国", 2666D, Arrays.asList(productService.selctProductById(id)));
     }
 }

@@ -16,7 +16,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product selctProductById(Integer id) {
 
-        return restTemplate.getForObject("http://product-service/product" + id, Product.class);
+        return restTemplate.getForObject("http://product-service/product/" + id, Product.class);
 
     }
 }
