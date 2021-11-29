@@ -7,7 +7,8 @@ spring:
   cloud:
     sentinel:
       transport:
-        dashboard: 150.158.54.214:8080
+        port: 8719
+        dashboard: localhost:8080
 
 
 eureka:
